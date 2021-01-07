@@ -69,7 +69,7 @@
     let userScore = 0;
     let cpuScore =  0;
     for (i = 0; i < 5; i++) {
-      result = playRound(prompt("Your choise"), computerPlay())
+      result = playRound(prompt("Your choice"), computerPlay())
       if (result.includes("win")) {
         userScore++
       } else if (result.includes("lose")) {
