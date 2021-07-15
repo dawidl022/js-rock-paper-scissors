@@ -4,14 +4,30 @@ const options = ["Rock", "Paper", "Scissors"];
 const optionsLower = options.map(option => option.toLowerCase());
 
 
+function beatsMessage (stronger, weaker){
+  return `${options[stronger]} beats ${options[weaker]}`;
+}
+
+
 function computerPlay() {
   // return index of option
   return Math.floor(Math.random() * 3);
 }
 
 
-function beatsMessage (stronger, weaker){
-  return `${options[stronger]} beats ${options[weaker]}`;
+function userPlay() {
+  let userInput;
+  let promptMessage = "Your choice:";
+
+  do {
+    if (userInput) {
+      promptMessage = `Incorrect option, choose between: ${options.join(", ")}`;
+    }
+
+    userInput = prompt(promptMessage).toLowerCase();
+  } while (!optionsLower.includes(userInput))
+  
+  return optionsLower.indexOf(userInput);
 }
 
 
@@ -36,22 +52,6 @@ function playRound(playerSelection, computerSelection) {
   }
 
   return {"msg": msg, "score": score};
-}
-
-
-function userPlay() {
-  let userInput;
-  let promptMessage = "Your choice:";
-
-  do {
-    if (userInput) {
-      promptMessage = `Incorrect option, choose between: ${options.join(", ")}`;
-    }
-
-    userInput = prompt(promptMessage).toLowerCase();
-  } while (!optionsLower.includes(userInput))
-  
-  return optionsLower.indexOf(userInput);
 }
 
 
