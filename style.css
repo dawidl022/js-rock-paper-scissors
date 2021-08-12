@@ -1,0 +1,44 @@
+html {
+  background-color: #333;
+  color: #ccc;
+  font-family: sans-serif;
+}
+
+.score {
+  justify-content: space-between;
+  display: flex;
+  font-size: 4rem;
+  margin: 0 .2em;
+}
+
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+  font-size: 30vmin;
+}
+
+.choice-btn {
+  transition: all .15s ease-in-out;
+  cursor: pointer;
+  padding: .3em;
+  margin: .1em 0;
+  border-radius: 20px;
+}
+
+.choice-btn:hover, .choice-btn:focus {
+  background-color: #222;
+  text-shadow: 0 0 10px #aaa;
+}
+
+.choice-btn:active {
+  transform: scale(1.1);
+}
+
+.results {
+  text-align: center;
+  font-size: 3rem;
+  margin: 1rem 0
+}
