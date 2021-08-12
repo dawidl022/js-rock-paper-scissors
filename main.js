@@ -39,11 +39,25 @@ playerBtns.forEach(btn => {
     const results = playRound(userOption, computerOption)
     resultsArea.textContent = results.msg;
     if (results.score === 1) {
+      btn.classList.add("win")
+      playerBtns[computerOption].classList.add("loss")
       scores.user++;
     } else if (results.score === -1) {
+      btn.classList.add("loss")
+      playerBtns[computerOption].classList.add("win")
       scores.cpu++;
     }
+    else {
+      btn.classList.add("draw")
+    }
     updateScores()
+    setTimeout(() => {
+      playerBtns.forEach(btn => {
+        btn.classList.remove("draw");
+        btn.classList.remove("win");
+        btn.classList.remove("loss");
+      })
+    }, 1000)
   });
 });
 

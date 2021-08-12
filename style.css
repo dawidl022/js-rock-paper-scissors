@@ -42,3 +42,15 @@ html {
   font-size: 3rem;
   margin: 1rem 0
 }
+
+.choice-btn.win {
+  background-color: green;
+}
+
+.choice-btn.draw {
+  background-color: yellow;
+}
+
+.choice-btn.loss {
+  background-color: red;
+}
