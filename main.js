@@ -14,21 +14,38 @@ function computerPlay() {
   return Math.floor(Math.random() * 3);
 }
 
+const resultsArea = document.querySelector(".results");
+const userScoreDisplay = document.querySelector("#user-score");
+const cpuScoreDisplay = document.querySelector("#cpu-score");
 
-function userPlay() {
-  let userInput;
-  let promptMessage = "Your choice:";
+const scores = { user: 0, cpu: 0 };
 
-  do {
-    if (userInput) {
-      promptMessage = `Incorrect option, choose between: ${options.join(", ")}`;
-    }
+function updateScores() {
+  userScoreDisplay.textContent = scores.user
+  cpuScoreDisplay.textContent = scores.cpu
+}
 
-    userInput = prompt(promptMessage).toLowerCase();
-  } while (!optionsLower.includes(userInput))
-  
+
+function userPlay(button) {
+  const userInput = button.dataset.choice;
   return optionsLower.indexOf(userInput);
 }
+
+const playerBtns = document.querySelectorAll(".choice-btn");
+playerBtns.forEach(btn => {
+  btn.addEventListener("click", function() {
+    const userOption = userPlay(this)
+    const computerOption = computerPlay()
+    const results = playRound(userOption, computerOption)
+    resultsArea.textContent = results.msg;
+    if (results.score === 1) {
+      scores.user++;
+    } else if (results.score === -1) {
+      scores.cpu++;
+    }
+    updateScores()
+  });
+});
 
 
 function playRound(playerSelection, computerSelection) {
@@ -56,28 +73,23 @@ function playRound(playerSelection, computerSelection) {
 
 
 function game() {
-  let playerScore = 0;
-  let cpuScore = 0;
   
-  for (let i = 0; i < 5; i++) {
-    const roundResults = playRound(userPlay(), computerPlay());
-    if (roundResults.score === 1) {
-      playerScore++;
-    } else if (roundResults.score === -1) {
-      cpuScore++;
-    }
+  // for (let i = 0; i < 5; i++) {
+  //   const roundResults = playRound(userPlay(), computerPlay());
+  //   if (roundResults.score === 1) {
+  //     playerScore++;
+  //   } else if (roundResults.score === -1) {
+  //     cpuScore++;
+  //   }
 
-    console.log(roundResults.msg);
-  }
-
-  // display the final results
-  if (playerScore > cpuScore) {
-    console.log("YOU WIN!!");
-  } else if (playerScore === cpuScore) {
-    console.log("It's a tie.");
-  } else {
-    console.log("Sorry, the computer won this time.");
-  }
+  // // display the final results
+  // if (playerScore > cpuScore) {
+  //   console.log("YOU WIN!!");
+  // } else if (playerScore === cpuScore) {
+  //   console.log("It's a tie.");
+  // } else {
+  //   console.log("Sorry, the computer won this time.");
+  // }
 }
 
 
