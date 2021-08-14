@@ -15,6 +15,8 @@ function computerPlay() {
 }
 
 const resultsArea = document.querySelector(".results");
+const gameOverSection = document.querySelector(".game-over");
+const overallResult = document.querySelector(".overall-result");
 const userScoreDisplay = document.querySelector("#user-score");
 const cpuScoreDisplay = document.querySelector("#cpu-score");
 
@@ -26,10 +28,20 @@ function updateScores() {
 
   if (scores.user >= 5 || scores.cpu >= 5) {
     playerBtns.forEach(btn => {
-      btn.classList.add("disabled")
-      btn.setAttribute("disabled", "disabled")
-    })
+      btn.classList.add("disabled");
+      btn.setAttribute("disabled", "disabled");
+      gameOverSection.classList.add("visible");
+      if (scores.user > scores.cpu) {
+        overallResult.textContent = "YOU WIN!!";
+      } else {
+        overallResult.textContent = "Sorry, the computer won this time.";
+      }
+   });
   }
+}
+
+function resetGame() {
+
 }
 
 
@@ -38,34 +50,44 @@ function userPlay(button) {
   return optionsLower.indexOf(userInput);
 }
 
+function choiceClick() {
+  playerBtns.forEach(btn => {
+    btn.removeEventListener("click", choiceClick)
+  });
+  
+  const userOption = userPlay(this);
+  const computerOption = computerPlay();
+  const results = playRound(userOption, computerOption);
+
+  resultsArea.textContent = results.msg;
+  if (results.score === 1) {
+    this.classList.add("win");
+    playerBtns[computerOption].classList.add("loss");
+    scores.user++;
+  } else if (results.score === -1) {
+    this.classList.add("loss");
+    playerBtns[computerOption].classList.add("win");
+    scores.cpu++;
+  }
+  else {
+    this.classList.add("draw");
+  }
+
+  updateScores();
+  
+  setTimeout(() => {
+    playerBtns.forEach(btn => {
+      btn.addEventListener("click", choiceClick);
+      btn.classList.remove("draw");
+      btn.classList.remove("win");
+      btn.classList.remove("loss");
+    });
+  }, 1000);
+}
+
 const playerBtns = document.querySelectorAll(".choice-btn");
 playerBtns.forEach(btn => {
-  btn.addEventListener("click", function() {
-    const userOption = userPlay(this);
-    const computerOption = computerPlay();
-    const results = playRound(userOption, computerOption);
-    resultsArea.textContent = results.msg;
-    if (results.score === 1) {
-      btn.classList.add("win");
-      playerBtns[computerOption].classList.add("loss");
-      scores.user++;
-    } else if (results.score === -1) {
-      btn.classList.add("loss");
-      playerBtns[computerOption].classList.add("win");
-      scores.cpu++;
-    }
-    else {
-      btn.classList.add("draw");
-    }
-    updateScores();
-    setTimeout(() => {
-      playerBtns.forEach(btn => {
-        btn.classList.remove("draw");
-        btn.classList.remove("win");
-        btn.classList.remove("loss");
-      })
-    }, 1000);
-  });
+  btn.addEventListener("click", choiceClick);
 });
 
 
@@ -112,6 +134,3 @@ function game() {
   //   console.log("Sorry, the computer won this time.");
   // }
 }
-
-
-game();

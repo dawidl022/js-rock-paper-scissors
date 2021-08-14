@@ -9,6 +9,7 @@ html {
   display: flex;
   font-size: 4rem;
   margin: 0 .2em;
+  text-align: center;
 }
 
 
@@ -17,7 +18,7 @@ html {
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   align-items: center;
-  font-size: 30vmin;
+  font-size: 15vw;
 }
 
 .choice-btn {
@@ -40,27 +41,59 @@ html {
 .results {
   text-align: center;
   font-size: 3rem;
-  margin: 1rem 0
-}
-
-.choice-btn.win {
-  background-color: green;
-}
-
-.choice-btn.draw {
-  background-color: yellow;
-}
-
-.choice-btn.loss {
-  background-color: red;
+  margin: 1rem 0;
 }
 
 .choice-btn.disabled {
-  font-size: 15vmin;
+  font-size: 7.5vw;
   color: #777;
 }
 
 .choice-btn.disabled:hover, .choice-btn.disabled:focus {
   background-color: transparent;
   text-shadow: none;
+}
+
+.buttons .choice-btn.win {
+  background-color: green;
+}
+
+.buttons .choice-btn.draw {
+  background-color: yellow;
+}
+
+.buttons .choice-btn.loss {
+  background-color: red;
+}
+
+.game-over {
+  display: none;
+  text-align: center;
+}
+.game-over.visible {
+  display: block;
+}
+
+.game-over-text {
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.overall-result {
+  font-size: 3.5rem;
+}
+
+.game-over button {
+  background-color: #045504;
+  font-size: 2rem;
+  padding: .75em 1.5em;
+  margin: .75em;
+  border: .1em solid #002800;
+  border-radius: 3px;
+}
+
+.game-over button:hover {
+  background-color: #156615;
+  cursor: pointer;
+  text-shadow: 0 0 2px #aaa;
 }
