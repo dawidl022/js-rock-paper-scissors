@@ -21,8 +21,15 @@ const cpuScoreDisplay = document.querySelector("#cpu-score");
 const scores = { user: 0, cpu: 0 };
 
 function updateScores() {
-  userScoreDisplay.textContent = scores.user
-  cpuScoreDisplay.textContent = scores.cpu
+  userScoreDisplay.textContent = scores.user;
+  cpuScoreDisplay.textContent = scores.cpu;
+
+  if (scores.user >= 5 || scores.cpu >= 5) {
+    playerBtns.forEach(btn => {
+      btn.classList.add("disabled")
+      btn.setAttribute("disabled", "disabled")
+    })
+  }
 }
 
 
@@ -34,30 +41,30 @@ function userPlay(button) {
 const playerBtns = document.querySelectorAll(".choice-btn");
 playerBtns.forEach(btn => {
   btn.addEventListener("click", function() {
-    const userOption = userPlay(this)
-    const computerOption = computerPlay()
-    const results = playRound(userOption, computerOption)
+    const userOption = userPlay(this);
+    const computerOption = computerPlay();
+    const results = playRound(userOption, computerOption);
     resultsArea.textContent = results.msg;
     if (results.score === 1) {
-      btn.classList.add("win")
-      playerBtns[computerOption].classList.add("loss")
+      btn.classList.add("win");
+      playerBtns[computerOption].classList.add("loss");
       scores.user++;
     } else if (results.score === -1) {
-      btn.classList.add("loss")
-      playerBtns[computerOption].classList.add("win")
+      btn.classList.add("loss");
+      playerBtns[computerOption].classList.add("win");
       scores.cpu++;
     }
     else {
-      btn.classList.add("draw")
+      btn.classList.add("draw");
     }
-    updateScores()
+    updateScores();
     setTimeout(() => {
       playerBtns.forEach(btn => {
         btn.classList.remove("draw");
         btn.classList.remove("win");
         btn.classList.remove("loss");
       })
-    }, 1000)
+    }, 1000);
   });
 });
 

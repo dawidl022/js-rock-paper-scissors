@@ -54,3 +54,13 @@ html {
 .choice-btn.loss {
   background-color: red;
 }
+
+.choice-btn.disabled {
+  font-size: 15vmin;
+  color: #777;
+}
+
+.choice-btn.disabled:hover, .choice-btn.disabled:focus {
+  background-color: transparent;
+  text-shadow: none;
+}
