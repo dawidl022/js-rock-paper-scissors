@@ -4,6 +4,12 @@ html {
   font-family: sans-serif;
 }
 
+main {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: auto auto 1fr;
+}
+
 .score {
   justify-content: space-between;
   display: flex;
@@ -71,7 +77,9 @@ html {
   text-align: center;
 }
 .game-over.visible {
-  display: block;
+  display: grid;
+  justify-items: center;
+  align-items: center;
 }
 
 .game-over-text {
@@ -84,7 +92,7 @@ html {
 }
 
 .game-over button {
-  background-color: #045504;
+  background-color: #046d04;
   font-size: 2rem;
   padding: .75em 1.5em;
   margin: .75em;
@@ -92,8 +100,32 @@ html {
   border-radius: 3px;
 }
 
-.game-over button:hover {
-  background-color: #156615;
+.game-over button:hover, button:focus {
+  background-color: #157f15;
   cursor: pointer;
   text-shadow: 0 0 2px #aaa;
+}
+
+@media (max-width: 650px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 1920px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 2560px) {
+  html {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 3840px) {
+  html {
+    font-size: 32px;
+  }
 }
