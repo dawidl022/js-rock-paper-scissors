@@ -41,8 +41,19 @@ function updateScores() {
 }
 
 function resetGame() {
-
+  scores.user = 0;
+  scores.cpu = 0;
+  updateScores();
+  playerBtns.forEach(btn => {
+    btn.classList.remove("disabled");
+    btn.removeAttribute("disabled", "disabled");
+  });
+  resultsArea.textContent = "";
+  gameOverSection.classList.remove("visible");
 }
+
+const resetBtn = document.querySelector("#reset-btn");
+resetBtn.addEventListener("click", resetGame);
 
 
 function userPlay(button) {
@@ -112,25 +123,4 @@ function playRound(playerSelection, computerSelection) {
   }
 
   return {"msg": msg, "score": score};
-}
-
-
-function game() {
-  
-  // for (let i = 0; i < 5; i++) {
-  //   const roundResults = playRound(userPlay(), computerPlay());
-  //   if (roundResults.score === 1) {
-  //     playerScore++;
-  //   } else if (roundResults.score === -1) {
-  //     cpuScore++;
-  //   }
-
-  // // display the final results
-  // if (playerScore > cpuScore) {
-  //   console.log("YOU WIN!!");
-  // } else if (playerScore === cpuScore) {
-  //   console.log("It's a tie.");
-  // } else {
-  //   console.log("Sorry, the computer won this time.");
-  // }
 }
