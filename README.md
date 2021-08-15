@@ -2,5 +2,6 @@
 
 Simple implementation of the classic "Rock, Paper, Scissors" game in JavaScript.
 
-At the moment, the game input is made through `prompt()` and game results are 
-logged to the console.
+The game is playable in the browser with the use of buttons. The score is
+updated after each round, and the game ends once either the player on the
+computer scores 5 points.
